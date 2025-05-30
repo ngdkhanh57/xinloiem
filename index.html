@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anh xin lỗi</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #fcdcdc;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .falling-text {
+      position: absolute;
+      white-space: nowrap;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffffff;
+      text-shadow: 1px 1px 2px #00000033;
+      animation: fall linear;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      color: red;
+      animation: floatUp 8s linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) scale(1.5);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Nhạc nền -->
+  <audio id="bgMusic" autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/03/17/audio_cfb39cc184.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const messages = [
+      "Anh xin lỗi", "Tha lỗi cho anh", "Anh sai rồi", "Em à",
+      "Yêu em", "❤️", "😔", "🥺", "Baby à", "😭"
+    ];
+
+    function createFallingText() {
+      const text = document.createElement('div');
+      text.classList.add('falling-text');
+      text.textContent = messages[Math.floor(Math.random() * messages.length)];
+      text.style.left = Math.random() * window.innerWidth + 'px';
+      text.style.animationDuration = (3 + Math.random() * 5) + 's';
+      text.style.fontSize = (16 + Math.random() * 20) + 'px';
+      document.body.appendChild(text);
+      setTimeout(() => text.remove(), 8000);
+    }
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.fontSize = (10 + Math.random() * 20) + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }
+
+    setInterval(createFallingText, 300);
+    setInterval(createHeart, 500);
+  </script>
+</body>
+</html>
